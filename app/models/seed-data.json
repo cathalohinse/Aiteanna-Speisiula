@@ -1,0 +1,45 @@
+{
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    "cathal": {
+      "firstName": "Cathal",
+      "lastName": "Henchy",
+      "email": "cathalohinse@gmail.com",
+      "password": "q"
+    }
+  },
+  "categories": {
+    "_model": "Category",
+    "banner": {
+      "county": "Clare",
+      "province": "Munster"
+    },
+    "deise": {
+      "county": "Waterford",
+      "province": "Munster"
+    }
+  },
+  "pois": {
+    "_model": "Poi",
+    "sullies": {
+      "name": "Sullies",
+      "location": "Princes St",
+      "image": "dan.png",
+      "category": "->categories.deise",
+      "submitter": "->users.homer"
+    },
+    "henchy": {
+      "name": "Norrie Henchy's",
+      "location": "Sraithín",
+      "image": "henchy.jpg",
+      "category": "->categories.banner",
+      "submitter": "->users.cathal"
+    }
+  }
+}

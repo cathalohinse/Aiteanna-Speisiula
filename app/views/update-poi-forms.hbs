@@ -1,0 +1,30 @@
+<form action="/update-poi" method="POST">
+  <div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+      <span class="uk-form-icon" uk-icon="icon: user"></span>
+      <input class="uk-input uk-form-large" type="text" name="name" value="{{poi.name}}">
+    </div>
+  </div>
+  <div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+      <span class="uk-form-icon" uk-icon="icon: user"></span>
+      <input placeholder="{{poi.location}}" class="uk-input uk-form-large" type="text" name="location" value="{{poi.location}}">
+    </div>
+  </div>
+  <div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+      <span class="uk-form-icon" uk-icon="icon: mail"></span>
+      <input placeholder="{{poi.image}}" class="uk-input uk-form-large" type="text" name="imagefile" value="{{poi.image}}">
+    </div>
+  </div>
+  <div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+      <span class="uk-form-icon" uk-icon="icon: lock"></span>
+      <input class="uk-input uk-form-large" type="password" name="category" value="{{user.category}}">
+    </div>
+  </div>
+  <div class="uk-margin">
+    <button style="background-color: #653DC2"
+            class="uk-button uk-button-primary uk-button-large uk-width-1-1">Update</button>
+  </div>
+</form>

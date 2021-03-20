@@ -1,0 +1,18 @@
+<div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
+  {{> title-card title="Pubs of Interest Inc." subTitle="Please update your Pub of Interest"}}
+  {{> main-menu }}
+</div>
+
+<div class="uk-container uk-margin">
+  <div class="uk-child-width-expand uk-flex-center uk-flex-middle uk-text-center" uk-grid>
+    <div class="uk-width-auto@m">
+      <img width="300" src="/images/hamilton.jpg">
+    </div>
+    <div class="uk-width-expand@m">
+      <div style="background-color: #877EB4" class="uk-card uk-card-default uk-width-xlarge uk-card-body uk-box-shadow-large">
+        <h3 class="uk-card-title uk-text-center">Your Pub of Interest:</h3>
+        {{> update-poi-form}}
+      </div>
+    </div>
+  </div>
+</div>

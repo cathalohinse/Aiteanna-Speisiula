@@ -1,0 +1,19 @@
+<div style="background-color: #877EB4" class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+  <table style="color: black" class="uk-table">
+    <caption style="color: black">
+      All Categories available:
+    </caption>
+    <thead>
+    <th style="color: black">County</th>
+    <th style="color: black">Province</th>
+    </thead>
+    <tbody class="uk-text-left">
+    {{#each categories}}
+      <tr>
+        <td>{{county}}</td>
+        <td>{{province}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>

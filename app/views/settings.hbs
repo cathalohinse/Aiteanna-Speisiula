@@ -1,0 +1,20 @@
+<div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
+  {{> title-card title="Pubs of Interest Inc." subTitle="Your details..."}}
+  {{> main-menu }}
+</div>
+
+<div class="uk-container uk-margin">
+  <div class="uk-child-width-expand uk-flex-center uk-flex-middle uk-text-center" uk-grid>
+    <div class="uk-width-auto@m">
+      <img width="300" src="images/phair.jpg">
+    </div>
+
+    <div class="uk-width-expand@m">{{> settings-form}}
+      <div class="uk-margin">
+        <button style="background-color: #653DC2" class="uk-button uk-button-primary uk-button-large uk-width-1-1"><a href="/deleteuser" style="color: white">Delete</a></button>
+      </div>
+    </div>
+    <div class="uk-width-expand@m">{{> category-form}}</div>
+
+  </div>
+</div>
