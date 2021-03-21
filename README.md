@@ -30,4 +30,4 @@ This application incorporates the following:
 
 	
 ### Links
-* [Glitch](https://pubs-of-interest.glitch.me/)
+* [Glitch](https://aiteanna-speisiula.glitch.me/)
