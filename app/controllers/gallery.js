@@ -1,9 +1,8 @@
 'use strict';
-
 const ImageStore = require('../models/image-store');
-const Joi = require('@hapi/joi');
 
 const Gallery = {
+
   index: {
     handler: async function(request, h) {
       try {
@@ -52,6 +51,7 @@ const Gallery = {
       }
     }
   }
+
 };
 
 module.exports = Gallery;

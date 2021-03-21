@@ -1,13 +1,17 @@
 <div class="uk-width-expand@m">
   <div style="background-color: #877EB4" class="uk-card uk-card-default uk-width-xlarge uk-card-body uk-box-shadow-large">
     <h3 class="uk-card-title uk-text-center">New Category:</h3>
-    <form action="/category" method="POST">
+    <form action="/createcategory" method="POST">
       <div class="uk-margin">
         <div class="uk-inline uk-width-1-1">
           <input placeholder="Enter a new County here" class="uk-input uk-form-large" type="text" name="county">
         </div>
       </div>
-      <input placeholder="Enter a new Province here" class="uk-input uk-form-large" type="text" name="province">
+      <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+          <input placeholder="Enter a new Province here" class="uk-input uk-form-large" type="text" name="province">
+        </div>
+      </div>
       <div class="uk-margin">
         <button style="background-color: #653DC2" class="uk-button uk-button-primary uk-button-large uk-width-1-1">Save</button>
       </div>

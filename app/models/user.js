@@ -1,5 +1,4 @@
 "use strict";
-
 const Mongoose = require("mongoose");
 const Boom = require("@hapi/boom");
 const Schema = Mongoose.Schema;
