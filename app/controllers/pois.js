@@ -24,7 +24,7 @@ const Pois = {
     },
   },
 
-  poi: {
+  createPoi: {
     validate: {
       payload: {
         name: Joi.string().required(),
@@ -71,15 +71,6 @@ const Pois = {
     },
   },
 
-  deletePoi: {
-    handler: async function (request, h) {
-      const poi = Poi.findById(request.params._id);
-      console.log("Removing POI: " + poi);
-      await poi.remove();
-      return h.redirect("/report");
-    }
-  },
-
   showPoi: {
     handler: async function(request, h) {
       try {
@@ -93,50 +84,6 @@ const Pois = {
         return h.view("home", { errors: [{ message: err.message }] });
       }
     }
-  },
-
-  createCategory: {
-    validate: {
-      payload: {
-        county: Joi.string().required(),
-        province: Joi.string().required(),
-      },
-      options: {
-        abortEarly: false
-      },
-      failAction: function (request, h, error)
-      {
-        return h
-          .view('main', {
-            title: 'Error creating a new Category',
-            errors: error.details
-          })
-          .takeover()
-          .code(400);
-      }
-    },
-    handler: async function (request, h) {
-      try{
-        const id = request.auth.credentials.id;
-        const user = await User.findById(id);
-        const data = request.payload;
-        const newCategory = new Category({
-          county: data.county,
-          province: data.province,
-        });
-        await newCategory.save();
-        return h.redirect("/home");
-      } catch (err) {
-        return h.view("main", { errors: [{ message: err.message }] });
-      }
-    },
-  },
-
-  showCategories: {
-    handler: async function (request, h) {
-      const categories = await Category.find().lean();
-      return h.view("category", { title: "All Categories", categories: categories });
-    },
   },
 
   updatePoi: {
@@ -183,6 +130,57 @@ const Pois = {
     },
   },
 
+  deletePoi: {
+    handler: async function (request, h) {
+      const poi = Poi.findById(request.params._id);
+      console.log("Removing POI: " + poi);
+      await poi.remove();
+      return h.redirect("/report");
+    }
+  },
+
+  createCategory: {
+    validate: {
+      payload: {
+        county: Joi.string().required(),
+        province: Joi.string().required(),
+      },
+      options: {
+        abortEarly: false
+      },
+      failAction: function (request, h, error)
+      {
+        return h
+          .view('main', {
+            title: 'Error creating a new Category',
+            errors: error.details
+          })
+          .takeover()
+          .code(400);
+      }
+    },
+    handler: async function (request, h) {
+      try{
+        const data = request.payload;
+        const newCategory = new Category({
+          county: data.county,
+          province: data.province,
+        });
+        await newCategory.save();
+        const categories = await Category.find().lean();
+        return h.view("category", { title: "All Categories", categories: categories });
+      } catch (err) {
+        return h.view("main", { errors: [{ message: err.message }] });
+      }
+    },
+  },
+
+  showCategories: {
+    handler: async function (request, h) {
+      const categories = await Category.find().lean();
+      return h.view("category", { title: "All Categories", categories: categories });
+    },
+  }
 
 };
 

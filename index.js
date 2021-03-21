@@ -1,5 +1,4 @@
 "use strict";
-
 const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
@@ -17,7 +16,6 @@ const server = Hapi.server({
   port: process.env.PORT || 3000,
 });
 
-
 const credentials = {
   cloud_name: process.env.name,
   api_key: process.env.key,
@@ -28,8 +26,6 @@ if (result.error) {
   console.log(result.error.message);
   process.exit(1);
 }
-
-
 
 async function init() {
   await server.register(Inert);

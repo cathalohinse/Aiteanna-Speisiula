@@ -4,6 +4,7 @@ const Boom = require("@hapi/boom");
 const Joi = require('@hapi/joi');
 
 const Accounts = {
+
   index: {
     auth: false,
     handler: function(request, h) {
@@ -41,7 +42,6 @@ const Accounts = {
           .code(400);
       }
     },
-
     handler: async function(request, h) {
       try {
         const payload = request.payload;
@@ -170,7 +170,7 @@ const Accounts = {
       const user = await User.findById(id);
       console.log("Deleting User: " + user);
       await user.remove();
-      return h.redirect("/main/");
+      return h.view("delete-user");
     }
   }
 
