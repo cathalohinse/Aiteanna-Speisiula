@@ -1,6 +1,7 @@
 'use strict';
 const ImageStore = require('../models/image-store');
 
+
 const Gallery = {
 
   index: {
