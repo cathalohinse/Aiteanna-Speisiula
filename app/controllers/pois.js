@@ -5,7 +5,6 @@ const Category = require("../models/category");
 const ImageStore = require('../models/image-store');
 const Joi = require('@hapi/joi');
 
-
 const Pois = {
 
   home: {
