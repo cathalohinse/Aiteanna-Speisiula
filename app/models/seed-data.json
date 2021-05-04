@@ -5,13 +5,13 @@
       "firstName": "Homer",
       "lastName": "Simpson",
       "email": "homer@simpson.com",
-      "password": "secret"
+      "password": "$2a$10$YLzgnyE9fBdlOf.SD.9c5eC7NhXr4SMLoshlRTAZ7SXi2CAYVC2B."
     },
     "cathal": {
       "firstName": "Cathal",
       "lastName": "Henchy",
       "email": "cathalohinse@gmail.com",
-      "password": "q"
+      "password": "$2a$10$GDIUKb9vEZH5SCuwsDnwMuPsZl.Y0vlH2v9vg7yleezq25k5GmmlK"
     }
   },
   "categories": {

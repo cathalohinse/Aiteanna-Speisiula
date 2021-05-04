@@ -27,8 +27,8 @@ const Pois = {
   createPoi: {
     validate: {
       payload: {
-        name: Joi.string().required(),
-        location: Joi.string().required(),
+        name: Joi.string().alphanum().required(),
+        location: Joi.string().alphanum().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -89,8 +89,8 @@ const Pois = {
   updatePoi: {
     validate: {
       payload: {
-        name: Joi.string().required(),
-        location: Joi.string().required(),
+        name: Joi.string().alphanum().required(),
+        location: Joi.string().alphanum().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -142,8 +142,8 @@ const Pois = {
   createCategory: {
     validate: {
       payload: {
-        county: Joi.string().required(),
-        province: Joi.string().required(),
+        county: Joi.string().alphanum().required(),
+        province: Joi.string().alphanum().required(),
       },
       options: {
         abortEarly: false

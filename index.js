@@ -9,11 +9,16 @@ const env = require('dotenv');
 const ImageStore = require('./app/models/image-store');
 const dotenv = require('dotenv');
 const Joi = require("@hapi/joi");
+const fs = require('fs');
 
 env.config();
 
 const server = Hapi.server({
-  port: process.env.PORT || 3000,
+  port: 3443,
+  tls: {
+    key: fs.readFileSync('keys/private/webserver.key'),
+    cert: fs.readFileSync('keys/webserver.crt')
+  }
 });
 
 const credentials = {
