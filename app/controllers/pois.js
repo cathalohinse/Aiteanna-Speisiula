@@ -4,6 +4,7 @@ const User = require("../models/user");
 const Category = require("../models/category");
 const ImageStore = require('../models/image-store');
 const Joi = require('@hapi/joi');
+const sanitizeHtml = require("sanitize-html");
 
 const Pois = {
 
@@ -27,8 +28,8 @@ const Pois = {
   createPoi: {
     validate: {
       payload: {
-        name: Joi.string().alphanum().required(),
-        location: Joi.string().alphanum().required(),
+        name: Joi.string().required(),
+        location: Joi.string().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -57,9 +58,9 @@ const Pois = {
           province: rawCategory[1],
         });
         const newPoi = new Poi({
-          name: data.name,
-          location: data.location,
-          image: data.image,
+          name: sanitizeHtml(data.name),
+          location: sanitizeHtml(data.location),
+          image: sanitizeHtml(data.image),
           submitter: user._id,
           category: category._id,
         });
@@ -89,8 +90,8 @@ const Pois = {
   updatePoi: {
     validate: {
       payload: {
-        name: Joi.string().alphanum().required(),
-        location: Joi.string().alphanum().required(),
+        name: Joi.string().required(),
+        location: Joi.string().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -118,9 +119,9 @@ const Pois = {
         const rawCategory = poiEdit.category.split(",");
         const category = await Category.findOne({ county: rawCategory[0], province: rawCategory[1] }).lean();
 
-        poi.name = poiEdit.name;
-        poi.location = poiEdit.location;
-        poi.image = poiEdit.image;
+        poi.name = sanitizeHtml(poiEdit.name);
+        poi.location = sanitizeHtml(poiEdit.location);
+        poi.image = sanitizeHtml(poiEdit.image);
         poi.category = category._id;
         await poi.save();
         return h.redirect('/report');
@@ -163,8 +164,8 @@ const Pois = {
       try{
         const data = request.payload;
         const newCategory = new Category({
-          county: data.county,
-          province: data.province,
+          county: sanitizeHtml(data.county),
+          province: sanitizeHtml(data.province),
         });
         await newCategory.save();
         const categories = await Category.find().lean();

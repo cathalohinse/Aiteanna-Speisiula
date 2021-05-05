@@ -4,6 +4,7 @@ const Boom = require("@hapi/boom");
 const Joi = require('@hapi/joi');
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const sanitizeHtml = require("sanitize-html");
 
 const Accounts = {
 
@@ -25,8 +26,7 @@ const Accounts = {
     auth: false,
     validate: {
       payload: {
-        firstName: Joi.string().regex(/^[A-Z]{1,}$/),
-          //.required(),
+        firstName: Joi.string().regex(/^[A-Z][A-Z,a-z]{1,}$/), //Allows for a first name with only two characters, both of which could be uppercase (e.g. 'PJ')
         lastName: Joi.string().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
         password: Joi.string().required(),
@@ -57,10 +57,10 @@ const Accounts = {
         const hash = await bcrypt.hash(payload.password, saltRounds);
 
         const newUser = new User({
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-          email: payload.email,
-          password: hash
+          firstName: sanitizeHtml(payload.firstName),
+          lastName: sanitizeHtml(payload.lastName),
+          email: sanitizeHtml(payload.email),
+          password: sanitizeHtml(hash)
         });
         user = await newUser.save();
         request.cookieAuth.set({ id: user.id });
@@ -138,8 +138,8 @@ const Accounts = {
   updateSettings: {
     validate: {
       payload: {
-        firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/),
-        lastName: Joi.string().regex(/^[A-Z][a-z]{2,}$/),
+        firstName: Joi.string().regex(/^[A-Z][A-Z,a-z]{1,}$/),
+        lastName: Joi.string().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
         password: Joi.string().required(),
       },
@@ -161,10 +161,10 @@ const Accounts = {
       const userEdit = request.payload;
       const id = request.auth.credentials.id;
       const user = await User.findById(id);
-      user.firstName = userEdit.firstName;
-      user.lastName = userEdit.lastName;
-      user.email = userEdit.email;
-      user.password = userEdit.password;
+      user.firstName = sanitizeHtml(userEdit.firstName);
+      user.lastName = sanitizeHtml(userEdit.lastName);
+      user.email = sanitizeHtml(userEdit.email);
+      user.password = sanitizeHtml(userEdit.password);
       await user.save();
       return h.redirect("/settings");
     }
