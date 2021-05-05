@@ -1,15 +1,16 @@
 <div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
-  {{> title-card title="Pubs of Interest" subTitle="Please submit a Pub of Interest"}}
-  {{> main-menu }}
+  {{> title-card title="Pubs of Interest" subTitle="You've been hacked!"}}
+  {{> welcome-menu }}
 </div>
 
 <div class="uk-container uk-margin">
   <div class="uk-child-width-expand uk-flex-center uk-flex-middle uk-text-center" uk-grid>
     <div class="uk-width-auto@m">
-      <img width="300" src="images/hickey.jpg" />
+      <img width="300" src="images/blackmirror.png" />
     </div>
     <div class="uk-width-expand@m">
-      {{> create-poi}}
+      <h1 class="uk-heading-small">This is not a Secure Web App!</h1>
+      {{> error }}
     </div>
   </div>
 </div>
