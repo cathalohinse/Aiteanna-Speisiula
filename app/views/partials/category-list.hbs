@@ -6,12 +6,14 @@
     <thead>
     <th style="color: black">County</th>
     <th style="color: black">Province</th>
+    <th style="color: black">Delete</th>
     </thead>
     <tbody class="uk-text-left">
     {{#each categories}}
       <tr>
         <td>{{county}}</td>
         <td>{{province}}</td>
+        <td><a href="/deletecategory/{{_id}}"><i class="fas fa-trash fa-2x" style="color:#653DC2"></i></a></td>
       </tr>
     {{/each}}
     </tbody>

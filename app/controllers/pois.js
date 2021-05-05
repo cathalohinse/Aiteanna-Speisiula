@@ -15,6 +15,12 @@ const Pois = {
     },
   },
 
+  evil: {
+    handler: async function (request, h) {
+      return h.view("evil", { title: "YOU'VE BEEN HACKED"});
+    },
+  },
+
   report: {
     handler: async function (request, h) {
       const pois = await Poi.find().populate("submitter").populate("category").lean();
@@ -181,7 +187,16 @@ const Pois = {
       const categories = await Category.find().lean();
       return h.view("category", { title: "All Categories", categories: categories });
     },
-  }
+  },
+
+  deleteCategory: {
+    handler: async function (request, h) {
+      const category = Category.findById(request.params._id);
+      console.log("Removing Category: " + category);
+      await category.remove();
+      return h.redirect("/showcategories");
+    }
+  },
 
 };
 
