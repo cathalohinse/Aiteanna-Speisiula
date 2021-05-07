@@ -35,7 +35,6 @@ This application incorporates the following:
 ### Links
 * [Glitch](https://aiteanna-speisiula.glitch.me/)
 * [Heroku](https://aiteanna-speisiula.herokuapp.com/)
-<<<<<<< HEAD
 * [YouTube](https://www.youtube.com/watch?v=WgkLDYHRNuY)
 =======
 >>>>>>> 0b98eb7addb0482673ac2b4905b9a968d5fc8105
