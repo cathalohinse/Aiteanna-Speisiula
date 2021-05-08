@@ -1,5 +1,5 @@
 'use strict';
-const ImageStore = require('../models/image-store');
+const ImageStore = require('../utils/image-store');
 
 const Gallery = {
 

@@ -2,7 +2,7 @@
 const Poi = require("../models/poi");
 const User = require("../models/user");
 const Category = require("../models/category");
-const ImageStore = require('../models/image-store');
+const ImageStore = require('../utils/image-store');
 const Joi = require('@hapi/joi');
 const sanitizeHtml = require("sanitize-html");
 

@@ -6,7 +6,7 @@ const Handlebars = require("handlebars");
 const Cookie = require("@hapi/cookie");
 require('./app/models/db');
 const env = require('dotenv');
-const ImageStore = require('./app/models/image-store');
+const ImageStore = require('./app/utils/image-store');
 const dotenv = require('dotenv');
 const Joi = require("@hapi/joi");
 const fs = require('fs');
