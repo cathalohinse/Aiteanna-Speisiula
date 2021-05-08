@@ -42,12 +42,14 @@ const Pois = {
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const categories = await Category.find().lean();
         return h
-          .view('main', {
+          .view('home', {
             title: 'Error submitting POI',
-            errors: error.details
+            errors: error.details,
+            categories: categories
           })
           .takeover()
           .code(400);
@@ -86,7 +88,7 @@ const Pois = {
         console.log(poi);
         const category = await Category.find().lean();
         const categories = await Category.find().lean().sort('county');
-        return h.view("update-poi", { title: "Update POI", poi: poi, categories: categories });
+        return h.view("update-poi", { title: "Update POI", poi: poi, categories: categories, category: category });
       } catch (err) {
         return h.view("home", { errors: [{ message: err.message }] });
       }
@@ -104,12 +106,19 @@ const Pois = {
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const id = request.params._id;
+        const poi = await Poi.findById(id).populate('category').lean().sort('-category');
+        const category = await Category.find().lean();
+        const categories = await Category.find().lean().sort('county');
         return h
-          .view('main', {
+          .view('update-poi', {
             title: 'Failed to update POI',
-            errors: error.details
+            errors: error.details,
+            poi: poi,
+            categories: categories,
+            category: category
           })
           .takeover()
           .code(400);
@@ -155,12 +164,14 @@ const Pois = {
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const user = await User.findById(request.auth.credentials.id).lean();
         return h
-          .view('main', {
+          .view('settings', {
             title: 'Error creating a new Category',
-            errors: error.details
+            errors: error.details,
+            user: user
           })
           .takeover()
           .code(400);

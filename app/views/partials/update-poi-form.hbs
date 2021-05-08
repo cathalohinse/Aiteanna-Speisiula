@@ -8,14 +8,14 @@
   <div class="uk-margin">
     <div class="uk-inline uk-width-1-1">
       <span class="uk-form-icon" uk-icon="icon: location"></span>
-      <input placeholder="{{poi.location}}" class="uk-input uk-form-large" type="text" name="location" value="{{poi.location}}">
+      <input class="uk-input uk-form-large" type="text" name="location" value="{{poi.location}}">
     </div>
   </div>
 
   <div class="uk-margin">
     <div class="uk-inline uk-width-1-1">
       <span class="uk-form-icon" uk-icon="icon: image"></span>
-      <input placeholder="{{poi.image}}" class="uk-input uk-form-large" type="text" name="image" value="{{poi.image}}">
+      <input class="uk-input uk-form-large" type="text" name="image" value="{{poi.image}}">
     </div>
   </div>
 
@@ -23,7 +23,7 @@
     <label class="uk-form-label" for="form-stacked-select">Select Category</label>
     <div class="uk-form-controls">
       <select name="category" class="uk-select" value="{{poi.category}}">
-        <option value="{{poi.category.county}},{{poi.category.province}}"></option>
+        <option value="{{poi.category.county}},{{poi.category.province}}" selected>{{poi.category.county}}, {{poi.category.province}}</option>
         {{#each categories}}
           <option value="{{county}},{{province}}">{{county}}, {{province}}</option>
         {{/each}}

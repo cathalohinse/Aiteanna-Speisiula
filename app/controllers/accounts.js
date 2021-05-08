@@ -146,12 +146,14 @@ const Accounts = {
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const user = await User.findById(request.auth.credentials.id).lean();
         return h
-          .view('main', {
+          .view("settings", {
             title: 'Error updating User Settings',
-            errors: error.details
+            errors: error.details,
+            user: user
           })
           .takeover()
           .code(400);
