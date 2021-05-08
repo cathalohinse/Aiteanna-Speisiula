@@ -5,13 +5,20 @@
         <div class="uk-margin">
           <label style="color: black" class="uk-form-label" for="form-stacked-text">Enter Name of Pub</label>
           <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" name="name" placeholder="Name of Pub" />
+            <input class="uk-input" id="form-stacked-text" type="text" name="name" placeholder="Name of Pub"/>
           </div>
         </div>
         <div class="uk-margin">
           <label style="color: black" class="uk-form-label" for="form-stacked-text">Enter Location of Pub</label>
           <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" name="location" placeholder="Location of Pub" />
+            <input class="uk-input" id="form-stacked-text" type="text" name="location" placeholder="Location of Pub"/>
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label style="color: black" class="uk-form-label" for="form-stacked-text">Enter Coordinates (Latitude & Longitude) of Location of Pub</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="number" step="any" name="latitude" placeholder="Latitude"/>
+            <input class="uk-input" id="form-stacked-text" type="number" step="any" name="longitude" placeholder="Longitude"/>
           </div>
         </div>
         <div class="uk-grid uk-grid-stack">
@@ -36,6 +43,9 @@
     </div>
     </div>
   </form>
+  {{!<div class="uk-margin">
+    <a href="/map"><button style="background-color: #653DC2" class="submit uk-button uk-button-primary uk-button-large uk-width-1-1">Map</button></a>
+  </div>}}
   <div class=" uk-width-1-2@m">
     <div class="uk-margin">
       <a href="/index"><button style="background-color: #653DC2" class="submit uk-button uk-button-primary uk-button-large uk-width-1-1">Images</button></a>

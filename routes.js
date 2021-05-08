@@ -26,6 +26,7 @@ module.exports = [
   { method: "GET", path: "/evil", config: Pois.evil },
 
   { method: 'GET', path: "/index", config: Gallery.index },
+  { method: 'GET', path: "/map", config: Pois.map },
   { method: 'POST', path: "/uploadfile", config: Gallery.uploadFile },
   { method: 'GET', path: "/deleteimage/{id}", config: Gallery.deleteImage },
 
