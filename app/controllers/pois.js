@@ -219,13 +219,6 @@ const Pois = {
       await category.remove();
       return h.redirect("/showcategories");
     }
-  },
-
-  map: {
-    handler: async function (request, h) {
-      const poi = Poi.findById(request.params._id);
-      return h.view("map", { title: "Select Coordinates", poi: poi });
-    },
   }
 
 };
