@@ -36,6 +36,9 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
+        //coordinates: Joi.number().required(),
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -68,6 +71,9 @@ const Pois = {
         const newPoi = new Poi({
           name: sanitizeHtml(data.name),
           location: sanitizeHtml(data.location),
+          //coordinates: sanitizeHtml(data.coordinates),
+          latitude: sanitizeHtml(data.latitude),
+          longitude: sanitizeHtml(data.longitude),
           image: sanitizeHtml(data.image),
           submitter: user._id,
           category: category._id,
@@ -100,6 +106,9 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
+        //coordinates: Joi.number().required(),
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
@@ -136,6 +145,9 @@ const Pois = {
 
         poi.name = sanitizeHtml(poiEdit.name);
         poi.location = sanitizeHtml(poiEdit.location);
+        //poi.coordinates = sanitizeHtml(poiEdit.coordinates);
+        poi.latitude = sanitizeHtml(poiEdit.latitude);
+        poi.longitude = sanitizeHtml(poiEdit.longitude);
         poi.image = sanitizeHtml(poiEdit.image);
         poi.category = category._id;
         await poi.save();
@@ -207,7 +219,7 @@ const Pois = {
       await category.remove();
       return h.redirect("/showcategories");
     }
-  },
+  }
 
 };
 

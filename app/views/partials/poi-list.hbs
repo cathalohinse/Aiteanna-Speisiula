@@ -6,6 +6,7 @@
     <thead>
       <th style="color: black">Name</th>
       <th style="color: black">Location</th>
+      <th style="color: black">Coordinates</th>
       <th style="color: black">Image</th>
       <th style="color: black">Category</th>
       <th style="color: black">Submitter</th>
@@ -17,6 +18,7 @@
         <tr>
           <td>{{name}}</td>
           <td>{{location}}</td>
+          <td>{{latitude}}, {{longitude}}</td>
           <td>{{image}}</td>
           <td>{{category.county}} {{category.province}}</td>
           <td>{{submitter.firstName}} {{submitter.lastName}}</td>
@@ -26,4 +28,23 @@
       {{/each}}
     </tbody>
   </table>
+  <div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <div class="center">
+      <style>
+        #map {height: 400px; width: 670px;}
+      </style>
+    </div>
+    <div id = "map"></div>
+    <script>
+      var map = L.map('map').setView([30, 10], 2);
+      L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=jNToVn9vRKPowkkleFA9', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+      }).addTo(map);
+    {{#each pois}}
+      var marker = L.marker([{{latitude}}, {{longitude}}]).addTo(map);
+    {{/each}}
+    </script>
+  </div>
 </div>

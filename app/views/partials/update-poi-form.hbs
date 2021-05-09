@@ -11,16 +11,22 @@
       <input class="uk-input uk-form-large" type="text" name="location" value="{{poi.location}}">
     </div>
   </div>
-
+  <div class="uk-margin">
+    <div class="uk-form-controls">
+      <label style="color: black" class="uk-form-label" for="form-stacked-text">Latitude:</label>
+      <input class="uk-input" id="form-stacked-text" type="number" step="any" name="latitude" value="{{poi.latitude}}"/>
+      <label style="color: black" class="uk-form-label" for="form-stacked-text">Longitude:</label>
+      <input class="uk-input" id="form-stacked-text" type="number" step="any" name="longitude" value="{{poi.longitude}}"/>
+    </div>
+  </div>
   <div class="uk-margin">
     <div class="uk-inline uk-width-1-1">
       <span class="uk-form-icon" uk-icon="icon: image"></span>
       <input class="uk-input uk-form-large" type="text" name="image" value="{{poi.image}}">
     </div>
   </div>
-
   <div class="uk-margin">
-    <label class="uk-form-label" for="form-stacked-select">Select Category</label>
+    <label style="color: black" class="uk-form-label-left" for="form-stacked-select">Select Category</label>
     <div class="uk-form-controls">
       <select name="category" class="uk-select" value="{{poi.category}}">
         <option value="{{poi.category.county}},{{poi.category.province}}" selected>{{poi.category.county}}, {{poi.category.province}}</option>
@@ -30,10 +36,25 @@
       </select>
     </div>
   </div>
-
-
   <div class="uk-margin">
     <button style="background-color: #653DC2"
             class="uk-button uk-button-primary uk-button-large uk-width-1-1">Update</button>
+  </div>
+  <div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <div class="center">
+      <style>
+        #map {height: 300px; width: 520px;}
+      </style>
+    </div>
+    <div id = "map"></div>
+    <script>
+      var map = L.map('map').setView([30, 10], 1);
+      L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=jNToVn9vRKPowkkleFA9', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+      }).addTo(map);
+      var marker = L.marker([{{poi.latitude}}, {{poi.longitude}}]).addTo(map);
+    </script>
   </div>
 </form>
