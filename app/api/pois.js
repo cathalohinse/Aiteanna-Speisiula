@@ -5,13 +5,29 @@ const Category = require("../models/category");
 const Boom = require("@hapi/boom");
 
 const Pois = {
-  findAll: {
+  find: {
     auth: false,
     handler: async function (request, h) {
       const pois = await Poi.find();
       return pois;
     },
   },
+
+  findOne: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        const poi = await Poi.findOne({ _id: request.params.id });
+        if (!poi) {
+          return Boom.notFound("No POI with this id");
+        }
+        return poi;
+      } catch (err) {
+        return Boom.notFound("No POI with this id");
+      }
+    }
+  },
+
   findByCategory: {
     auth: false,
     handler: async function (request, h) {
@@ -19,17 +35,16 @@ const Pois = {
       return pois;
     },
   },
-  createPoi: {
+
+  create: {
     auth: false,
     handler: async function (request, h) {
-      let poi = new Poi(request.payload);
-      const category = await Category.findOne({ _id: request.params.id });
-      if (!category) {
-        return Boom.notFound("No Category with this id");
+      const newPoi = new Poi(request.payload);
+      const poi = await newPoi.save();
+      if (poi) {
+        return h.response(poi).code(201);
       }
-      poi.category = category._id;
-      poi = await poi.save();
-      return poi;
+      return Boom.badImplementation("error creating poi");
     },
   },
 
@@ -38,6 +53,17 @@ const Pois = {
     handler: async function (request, h) {
       await Poi.deleteMany({});
       return { success: true };
+    },
+  },
+
+  deleteOne: {
+    auth: false,
+    handler: async function (request, h) {
+      const poi = await Poi.remove({ _id: request.params.id });
+      if (poi) {
+        return { success: true };
+      }
+      return Boom.notFound("id not found");
     },
   },
 
