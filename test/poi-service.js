@@ -9,8 +9,12 @@ class PoiService {
   }
 
   async getCategories() {
-    const response = await axios.get(this.baseUrl + "/api/categories");
-    return response.data;
+    try {
+      const response = await axios.get(this.baseUrl + "/api/categories");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async getCategory(id) {
@@ -23,23 +27,39 @@ class PoiService {
   }
 
   async createCategory(newCategory) {
-    const response = await axios.post(this.baseUrl + "/api/categories", newCategory);
-    return response.data;
+    try {
+      const response = await axios.post(this.baseUrl + "/api/categories", newCategory);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async deleteAllCategories() {
-    const response = await axios.delete(this.baseUrl + "/api/categories");
-    return response.data;
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/categories");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async deleteOneCategory(id) {
-    const response = await axios.delete(this.baseUrl + "/api/categories/" + id);
-    return response.data;
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/categories/" + id);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async getUsers() {
-    const response = await axios.get(this.baseUrl + "/api/users");
-    return response.data;
+    try {
+      const response = await axios.get(this.baseUrl + "/api/users");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async getUser(id) {
@@ -52,18 +72,39 @@ class PoiService {
   }
 
   async createUser(newUser) {
-    const response = await axios.post(this.baseUrl + "/api/users", newUser);
-    return response.data;
+    try {
+      const response = await axios.post(this.baseUrl + "/api/users", newUser);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async deleteAllUsers() {
-    const response = await axios.delete(this.baseUrl + "/api/users");
-    return response.data;
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/users");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async deleteOneUser(id) {
-    const response = await axios.delete(this.baseUrl + "/api/users/" + id);
-    return response.data;
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/users/" + id);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getPois() {
+    try {
+      const response = await axios.get(this.baseUrl + "/api/pois");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
   }
 
   async getPoi(id) {
@@ -84,14 +125,18 @@ class PoiService {
     }
   }
 
-  async deleteOnePoi(id) {
-    const response = await axios.delete(this.baseUrl + "/api/pois/" + id);
-    return response.data;
-  }
-
   async deleteAllPois() {
     try {
       const response = await axios.delete(this.baseUrl + "/api/pois");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async deleteOnePoi(id) {
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/pois/" + id);
       return response.data;
     } catch (e) {
       return null;

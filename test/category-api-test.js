@@ -9,7 +9,7 @@ suite("Category API tests", function () {
   let categories = fixtures.categories;
   let newCategory = fixtures.newCategory;
 
-  const poiService = new PoiService("http://localhost:3000");
+  const poiService = new PoiService(fixtures.poiService);
 
   setup(async function () {
     await poiService.deleteAllCategories();
@@ -38,7 +38,7 @@ suite("Category API tests", function () {
     assert.isNull(c2);
   });
 
-  test("Delete a category", async function () {
+  test("Delete a Category", async function () {
     let c = await poiService.createCategory(newCategory);
     assert(c._id != null);
     await poiService.deleteOneCategory(c._id);
@@ -46,16 +46,16 @@ suite("Category API tests", function () {
     assert(c == null);
   });
 
-  test("Get All categories", async function () {
+  test("Get All Categories", async function () {
     for (let c of categories) {
       await poiService.createCategory(c);
     }
 
-    const allCategoreis = await poiService.getCategories();
-    assert.equal(allCategoreis.length, categories.length);
+    const allCategories = await poiService.getCategories();
+    assert.equal(allCategories.length, categories.length);
   });
 
-  test("Get categories Detail", async function () {
+  test("Get Categories Detail", async function () {
     for (let c of categories) {
       await poiService.createCategory(c);
     }
@@ -66,8 +66,9 @@ suite("Category API tests", function () {
     }
   });
 
-  test("Get All categories Empty", async function () {
+  test("Get All Categories Empty", async function () {
     const allCategories = await poiService.getCategories();
     assert.equal(allCategories.length, 0);
   });
+
 });
