@@ -13,12 +13,16 @@ const fs = require('fs');
 
 env.config();
 
-const server = Hapi.server({
+/*const server = Hapi.server({
   port: 3443,
   tls: {
     key: fs.readFileSync('keys/private/webserver.key'),
     cert: fs.readFileSync('keys/webserver.crt')
   }
+});*/
+
+const server = Hapi.server({
+  port: process.env.PORT || 3000,
 });
 
 const credentials = {
@@ -61,6 +65,7 @@ async function init() {
   });
   server.auth.default("session");
   server.route(require("./routes"));
+  server.route(require('./routes-api'));
   await server.start();
   console.log(`Server running at: ${server.info.uri}`);
 }
