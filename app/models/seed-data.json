@@ -30,6 +30,8 @@
     "sullies": {
       "name": "Sullies",
       "location": "Princes St",
+      "latitude": 16.77379,
+      "longitude": 96.16968,
       "image": "dan.png",
       "category": "->categories.deise",
       "submitter": "->users.homer"
@@ -37,6 +39,8 @@
     "henchy": {
       "name": "Norrie Henchy's",
       "location": "Sraithín",
+      "latitude": 47.91379,
+      "longitude": 106.90622,
       "image": "henchy.jpg",
       "category": "->categories.banner",
       "submitter": "->users.cathal"

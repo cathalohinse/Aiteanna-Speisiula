@@ -2,7 +2,7 @@
 const Poi = require("../models/poi");
 const User = require("../models/user");
 const Category = require("../models/category");
-const ImageStore = require('../models/image-store');
+const ImageStore = require('../utils/image-store');
 const Joi = require('@hapi/joi');
 const sanitizeHtml = require("sanitize-html");
 
@@ -36,18 +36,22 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const categories = await Category.find().lean();
         return h
-          .view('main', {
+          .view('home', {
             title: 'Error submitting POI',
-            errors: error.details
+            errors: error.details,
+            categories: categories
           })
           .takeover()
           .code(400);
@@ -66,6 +70,8 @@ const Pois = {
         const newPoi = new Poi({
           name: sanitizeHtml(data.name),
           location: sanitizeHtml(data.location),
+          latitude: sanitizeHtml(data.latitude),
+          longitude: sanitizeHtml(data.longitude),
           image: sanitizeHtml(data.image),
           submitter: user._id,
           category: category._id,
@@ -86,7 +92,7 @@ const Pois = {
         console.log(poi);
         const category = await Category.find().lean();
         const categories = await Category.find().lean().sort('county');
-        return h.view("update-poi", { title: "Update POI", poi: poi, categories: categories });
+        return h.view("update-poi", { title: "Update POI", poi: poi, categories: categories, category: category });
       } catch (err) {
         return h.view("home", { errors: [{ message: err.message }] });
       }
@@ -98,18 +104,27 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
         image: Joi.string().required(),
         category: Joi.string().required(),
       },
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const id = request.params._id;
+        const poi = await Poi.findById(id).populate('category').lean().sort('-category');
+        const category = await Category.find().lean();
+        const categories = await Category.find().lean().sort('county');
         return h
-          .view('main', {
+          .view('update-poi', {
             title: 'Failed to update POI',
-            errors: error.details
+            errors: error.details,
+            poi: poi,
+            categories: categories,
+            category: category
           })
           .takeover()
           .code(400);
@@ -127,6 +142,8 @@ const Pois = {
 
         poi.name = sanitizeHtml(poiEdit.name);
         poi.location = sanitizeHtml(poiEdit.location);
+        poi.latitude = sanitizeHtml(poiEdit.latitude);
+        poi.longitude = sanitizeHtml(poiEdit.longitude);
         poi.image = sanitizeHtml(poiEdit.image);
         poi.category = category._id;
         await poi.save();
@@ -155,12 +172,14 @@ const Pois = {
       options: {
         abortEarly: false
       },
-      failAction: function (request, h, error)
+      failAction: async function (request, h, error)
       {
+        const user = await User.findById(request.auth.credentials.id).lean();
         return h
-          .view('main', {
+          .view('settings', {
             title: 'Error creating a new Category',
-            errors: error.details
+            errors: error.details,
+            user: user
           })
           .takeover()
           .code(400);
@@ -196,7 +215,7 @@ const Pois = {
       await category.remove();
       return h.redirect("/showcategories");
     }
-  },
+  }
 
 };
 
