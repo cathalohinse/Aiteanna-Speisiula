@@ -30,6 +30,9 @@ This application incorporates the following:
 * Glitch
 * Screencastify
 * YouTube
+* Leaflet
+* MapTiler
+* sanitize-html
 
 	
 ### Links
