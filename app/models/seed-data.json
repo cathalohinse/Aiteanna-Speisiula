@@ -32,7 +32,7 @@
       "location": "Princes St",
       "latitude": 16.77379,
       "longitude": 96.16968,
-      "image": "dan.png",
+      "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1621082217/kf9foi8496whvzgqjvny.jpg",
       "category": "->categories.deise",
       "submitter": "->users.homer"
     },
@@ -41,7 +41,7 @@
       "location": "Sraithín",
       "latitude": 47.91379,
       "longitude": 106.90622,
-      "image": "henchy.jpg",
+      "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1616002230/owluu8mf11dlfrmv4761.jpg",
       "category": "->categories.banner",
       "submitter": "->users.cathal"
     }
