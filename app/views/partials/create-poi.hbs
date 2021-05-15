@@ -1,5 +1,5 @@
 <div style="background-color: #877EB4" class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
-  <form class="uk-form-stacked uk-text-left" action="/createpoi" method="POST">
+  <form class="uk-form-stacked uk-text-left" action="createpoi" method="POST" enctype="multipart/form-data">
     <div class="uk-grid uk-grid-stack">
       <div class="uk-width-1-1@m">
         <div class="uk-margin">
@@ -21,13 +21,7 @@
             <input class="uk-input" id="form-stacked-text" type="number" step="any" name="longitude" placeholder="Longitude"/>
           </div>
         </div>
-        <div class="uk-grid uk-grid-stack">
-          <label class="uk-form-label" for="form-horizontal-text">Select Image</label>
-          <div class="uk-form-controls">
-            <input type="file" id="form-stacked-text" class="uk-input" name="image">
-          </div>
-        </div>
-        <label class="uk-form-label" for="form-stacked-select">Select Category</label>
+        <label style="color: black" class="uk-form-label" for="form-stacked-select">Select Category</label>
         <div class="uk-form-controls">
           <select name="category" class="uk-select">
             {{#each categories}}
@@ -35,17 +29,16 @@
             {{/each}}
           </select>
         </div>
-      <div class=" uk-width-1-2@m">
         <div class="uk-margin">
-          <button style="background-color: #653DC2" class="submit uk-button uk-button-primary uk-button-large uk-width-1-1">Submit</button>
+          <label style="color: black" class="uk-form-label" for="form-stacked-text">Upload an Image of the Pub</label>
+          <input class="uk-input" id="form-stacked-text" type="file" name="imagefile" accept="image/png, image/jpeg">
+        </div>
+        <div class=" uk-width-1-2@m">
+          <div class="uk-margin">
+            <button style="background-color: #653DC2" class="submit uk-button uk-button-primary uk-button-large uk-width-1-1">Submit</button>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </form>
-  <div class=" uk-width-1-2@m">
-    <div class="uk-margin">
-      <a href="/index"><button style="background-color: #653DC2" class="submit uk-button uk-button-primary uk-button-large uk-width-1-1">Images</button></a>
-    </div>
-  </div>
 </div>
