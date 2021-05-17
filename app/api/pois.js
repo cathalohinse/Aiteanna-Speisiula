@@ -3,10 +3,13 @@
 const Poi = require("../models/poi");
 const Category = require("../models/category");
 const Boom = require("@hapi/boom");
+const utils = require("./utils.js");
 
 const Pois = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       const pois = await Poi.find();
       return pois;
@@ -14,7 +17,9 @@ const Pois = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const poi = await Poi.findOne({ _id: request.params.id });
@@ -29,7 +34,9 @@ const Pois = {
   },
 
   findByCategory: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       const pois = await Poi.find({ category: request.params.id });
       return pois;
@@ -37,19 +44,23 @@ const Pois = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
-      const newPoi = new Poi(request.payload);
-      const poi = await newPoi.save();
-      if (poi) {
-        return h.response(poi).code(201);
-      }
-      return Boom.badImplementation("error creating poi");
+      const userId = utils.getUserIdFromRequest(request);
+      let poi = new Poi(request.payload);
+
+      poi.submitter = userId;
+      poi = await poi.save();
+      return poi;
     },
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       await Poi.deleteMany({});
       return { success: true };
@@ -57,7 +68,9 @@ const Pois = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       const poi = await Poi.remove({ _id: request.params.id });
       if (poi) {
