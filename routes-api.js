@@ -20,5 +20,6 @@ module.exports = [
   { method: "POST", path: "/api/pois", config: Pois.create },
   { method: "DELETE", path: "/api/pois/{id}", config: Pois.deleteOne },
   { method: "DELETE", path: "/api/pois", config: Pois.deleteAll },
+  { method: "POST", path: "/api/users/authenticate", config: Users.authenticate },
 
 ];
