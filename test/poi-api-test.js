@@ -46,11 +46,19 @@ suite("POI API tests", function () {
     assert(p == null);
   });
 
-  test("Get All Pois", async function () {
+  test("Delete All POIs", async function () {
     for (let p of pois) {
       await poiService.createPoi(p);
     }
+    const allPois = await poiService.getPois();
+    assert.equal(allPois.length, pois.length);
+    await poiService.deleteAllPois();
+  });
 
+  test("Get All POIs", async function () {
+    for (let p of pois) {
+      await poiService.createPoi(p);
+    }
     const allPois = await poiService.getPois();
     assert.equal(allPois.length, pois.length);
   });
@@ -59,7 +67,6 @@ suite("POI API tests", function () {
     for (let p of pois) {
       await poiService.createPoi(p);
     }
-
     const allPois = await poiService.getPois();
     for (var i = 0; i < pois.length; i++) {
       assert(_.some([allPois[i]], pois[i]), "returnedPoi must be a superset of newPoi");
