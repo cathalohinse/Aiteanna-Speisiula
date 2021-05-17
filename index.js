@@ -10,6 +10,7 @@ const ImageStore = require('./app/utils/image-store');
 const dotenv = require('dotenv');
 const Joi = require("@hapi/joi");
 const fs = require('fs');
+const utils = require("./app/api/utils.js");
 
 env.config();
 
@@ -31,7 +32,9 @@ const credentials = {
   api_key: process.env.key,
   api_secret: process.env.secret
 };
+
 const result = dotenv.config();
+
 if (result.error) {
   console.log(result.error.message);
   process.exit(1);
@@ -41,10 +44,9 @@ async function init() {
   await server.register(Inert);
   await server.register(Vision);
   await server.register(Cookie);
+  await server.register(require('hapi-auth-jwt2'));
   await server.validator(require("@hapi/joi"));
-
   ImageStore.configure(credentials);
-
   server.views({
     engines: {
       hbs: require("handlebars"),
@@ -63,6 +65,11 @@ async function init() {
       isSecure: false
     },
     redirectTo: "/",
+  });
+  server.auth.strategy("jwt", "jwt", {
+    key: "secretpasswordnotrevealedtoanyone",
+    validate: utils.validate,
+    verifyOptions: { algorithms: ["HS256"] },
   });
   server.auth.default("session");
   server.route(require("./routes"));
