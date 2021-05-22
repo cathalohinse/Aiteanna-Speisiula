@@ -90,6 +90,8 @@ suite("POI API tests", function () {
   });
 
   test("Create a POI and Check Submitter", async function () {
+    //const returnedCategory = await poiService.createCategory(newCategory);
+    //await poiService.createPoi(returnedCategory._id, pois[0]);
     await poiService.createPoi(pois[0]);
     const returnedPois = await poiService.getPois();
     assert.isDefined(returnedPois[0].submitter);

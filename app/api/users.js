@@ -86,6 +86,24 @@ const Users = {
     },
   },
 
+  update: {
+
+
+    handler: async function (request, h) {
+      const userEdit = request.payload;
+      const user = await User.findById(userEdit._id);
+      user.firstName = userEdit.firstName;
+      user.lastName = userEdit.lastName;
+      user.email = userEdit.email;
+      user.password = userEdit.password;
+      await user.save();
+      if (user) {
+        return { success: true };
+      }
+      return Boom.notFound("id not found");
+    },
+  },
+
 };
 
 module.exports = Users;

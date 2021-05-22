@@ -51,6 +51,12 @@ const Pois = {
       const userId = utils.getUserIdFromRequest(request);
       let poi = new Poi(request.payload);
 
+      /*const category = await Category.findOne({ _id: request.params.id });
+      if (!category) {
+        return Boom.notFound("No Category with this id");
+      }
+      poi.category = category._id;*/
+
       poi.submitter = userId;
       poi = await poi.save();
       return poi;
