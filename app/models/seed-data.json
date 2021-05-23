@@ -33,6 +33,7 @@
       "latitude": 16.77379,
       "longitude": 96.16968,
       "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1621082217/kf9foi8496whvzgqjvny.jpg",
+      "rating": 2,
       "category": "->categories.deise",
       "submitter": "->users.homer"
     },
@@ -42,6 +43,7 @@
       "latitude": 47.91379,
       "longitude": 106.90622,
       "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1616002230/owluu8mf11dlfrmv4761.jpg",
+      "rating": 5,
       "category": "->categories.banner",
       "submitter": "->users.cathal"
     }

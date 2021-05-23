@@ -1,0 +1,99 @@
+<form action="/ratepoi/{{poi._id}}" method="POST" enctype="multipart/form-data">
+<table style="color: black" class="uk-table">
+  <caption style="color: black">
+    Pubs of Interest submitted to date:
+  </caption>
+  <thead>
+  <th style="color: black">Name</th>
+  <th style="color: black">Location</th>
+  <th style="color: black">Coordinates</th>
+  <th style="color: black">Image</th>
+  <th style="color: black">Category</th>
+  <th style="color: black">Submitter</th>
+  <th style="color: black">Rate</th>
+  </thead>
+  <tbody class="uk-text-left">
+    <tr>
+      <td>{{poi.name}}</td>
+      <td>{{poi.location}}</td>
+      <td>{{poi.latitude}}, {{poi.longitude}}</td>
+      <td><img src="{{poi.image}}" alt="Pub"></td>
+      <td>{{poi.category.county}}, {{poi.category.province}}</td>
+      <td>{{poi.submitter.firstName}}, {{poi.submitter.lastName}}</td>
+      <td>
+        <label style="color: black" class="uk-form-label" for="form-stacked-select">Select Rating</label>
+        <div class="uk-form-controls">
+          <select name="category" class="uk-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <div class="uk-margin">
+    <button style="background-color: #653DC2"
+            class="uk-button uk-button-primary uk-button-large uk-width-1-1">Rate</button>
+  </div>
+  <div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <div class="center">
+      <style>
+        #map {height: 300px; width: 520px;}
+      </style>
+    </div>
+  <div id = "map"></div>
+  <script>
+    baseLayers = {
+      Terrain: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 17,
+        attribution:
+          'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+      }),
+      Political: L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=jNToVn9vRKPowkkleFA9', {
+        maxZoom: 17,
+        attribution:
+          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      }),
+      Satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution:
+          'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+      }),
+    };
+
+    overlays = {
+      Wind : L.tileLayer('http://{s}.tile.openweathermap.org/map/wind/{z}/{x}/{y}.png?appid={apiKey}', {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+        apiKey: "822d307f66312c7cb5653a4bb93b886e",
+        opacity: 0.5
+      }),
+      Clouds : L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png?appid={apiKey}', {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+        apiKey: "822d307f66312c7cb5653a4bb93b886e",
+        opacity: 0.5
+      }),
+      Pressure : L.tileLayer('http://{s}.tile.openweathermap.org/map/pressure/{z}/{x}/{y}.png?appid={apiKey}', {
+        maxZoom: 19,
+        attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+        apiKey: "822d307f66312c7cb5653a4bb93b886e",
+        opacity: 0.5
+      })
+    };
+
+    var map = L.map('map').setView([30, 10], 1);
+    L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=jNToVn9vRKPowkkleFA9', {
+      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    }).addTo(map);
+    L.control.layers(baseLayers, overlays).addTo(map);
+    var marker = L.marker([{{poi.latitude}}, {{poi.longitude}}]).addTo(map).bindPopup("{{poi.name}}");
+  </script>
+  </div>
+  </div>
+</form>
