@@ -1,16 +1,16 @@
 'use strict';
 
-const Category = require('../models/category');
+const Message = require('../models/message');
 const Boom = require("@hapi/boom");
 
-const Categories = {
+const Messages = {
   find: {
     auth: {
       strategy: "jwt",
     },
     handler: async function (request, h) {
-      const categories = await Category.find();
-      return categories;
+      const messages = await Message.find();
+      return messages;
     },
   },
 
@@ -20,13 +20,13 @@ const Categories = {
     },
     handler: async function (request, h) {
       try {
-        const category = await Category.findOne({ _id: request.params.id });
-        if (!category) {
-          return Boom.notFound("No Category with this id");
+        const message = await Message.findOne({ _id: request.params.id });
+        if (!message) {
+          return Boom.notFound("No Message with this id");
         }
-        return category;
+        return message;
       } catch (err) {
-        return Boom.notFound("No Category with this id");
+        return Boom.notFound("No Message with this id");
       }
     }
   },
@@ -36,12 +36,12 @@ const Categories = {
       strategy: "jwt",
     },
     handler: async function (request, h) {
-      const newCategory = new Category(request.payload);
-      const category = await newCategory.save();
-      if (category) {
-        return h.response(category).code(201);
+      const newMessage = new Message(request.payload);
+      const message = await newMessage.save();
+      if (message) {
+        return h.response(message).code(201);
       }
-      return Boom.badImplementation("error creating category");
+      return Boom.badImplementation("error creating message");
     },
   },
 
@@ -50,7 +50,7 @@ const Categories = {
       strategy: "jwt",
     },
     handler: async function (request, h) {
-      await Category.remove({});
+      await Message.remove({});
       return { success: true };
     },
   },
@@ -60,7 +60,7 @@ const Categories = {
       strategy: "jwt",
     },
     handler: async function(request, h) {
-      const response = await Category.deleteOne({ _id: request.params.id });
+      const response = await Message.deleteOne({ _id: request.params.id });
       if (response.deletedCount == 1) {
         return { success: true };
       }
@@ -70,4 +70,4 @@ const Categories = {
 
 };
 
-module.exports = Categories;
+module.exports = Messages;

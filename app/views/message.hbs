@@ -1,0 +1,22 @@
+<div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
+  {{> title-card title="Pubs of Interest" subTitle="Private Messaging"}}
+  {{> main-menu }}
+</div>
+
+<div class="uk-container uk-margin">
+  <div class="uk-child-width-expand uk-text-center" uk-grid>
+    <div class="uk-width-auto@m">
+
+    </div>
+    <div class="uk-width-1-3">
+      {{> message-form}}
+      <img width="300" src="images/phair.jpg">
+      <div class="uk-margin">
+        <button style="background-color: #653DC2" class="uk-button uk-button-primary uk-button-large uk-width-1-1"><a href="/deleteuser" style="color: white">Placeholder button</a></button>
+      </div>
+    </div>
+    <div class="uk-width-expand@m">
+      {{> inbox}}
+    </div>
+  </div>
+</div>

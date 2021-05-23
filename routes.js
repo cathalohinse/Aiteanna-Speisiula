@@ -23,6 +23,9 @@ module.exports = [
   { method: 'GET', path: "/showcategories", config: Pois.showCategories },
   { method: "GET", path: "/deletecategory/{_id}", config: Pois.deleteCategory },
   { method: "GET", path: "/evil", config: Pois.evil },
+  { method: "GET", path: "/message", config: Accounts.showMessages },
+  { method: "POST", path: "/sendmessage", config: Accounts.sendMessage },
+  { method: "GET", path: "/deletemessage/{_id}", config: Accounts.deleteMessage },
 
 
   {

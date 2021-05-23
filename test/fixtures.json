@@ -1,5 +1,5 @@
 {
-  "poiService": "http://localhost:3000",
+  "poiService": "http://localhost:4000",
   "users": [
     {
       "firstName": "Homer",
@@ -40,6 +40,16 @@
       "province": "Munster"
     }
   ],
+  "messages": [
+    {
+      "body": "Congratulations, your API test has passed",
+      "recipient": "cathalohinse@gmail.com"
+    },
+    {
+      "body": "Your API is now fully safe to use",
+      "recipient": "homer@simpson.com"
+    }
+  ],
   "newUser": {
     "firstName": "Dan",
     "lastName": "Shanahan",
@@ -57,5 +67,10 @@
   {
     "county": "Tyrone",
     "province": "Ulster"
+  },
+  "newMessage":
+  {
+    "body": "Your API is exquisite!",
+    "recipient": "DantheMan@gmail.com"
   }
 }

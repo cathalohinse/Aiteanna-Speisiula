@@ -8,8 +8,19 @@ const _ = require("lodash");
 suite("POI API tests", function () {
   let pois = fixtures.pois;
   let newPoi = fixtures.newPoi;
-
+  let newUser = fixtures.newUser;
   const poiService = new PoiService(fixtures.poiService);
+
+  suiteSetup(async function () {
+    await poiService.deleteAllUsers();
+    const returnedUser = await poiService.createUser(newUser);
+    const response = await poiService.authenticate(newUser);
+  });
+
+  suiteTeardown(async function () {
+    await poiService.deleteAllUsers();
+    poiService.clearAuth();
+  })
 
   setup(async function () {
     await poiService.deleteAllPois();
@@ -76,6 +87,16 @@ suite("POI API tests", function () {
   test("Get All POIs Empty", async function () {
     const allPois = await poiService.getPois();
     assert.equal(allPois.length, 0);
+  });
+
+  test("Create a POI and Check Submitter", async function () {
+    //const returnedCategory = await poiService.createCategory(newCategory);
+    //await poiService.createPoi(returnedCategory._id, pois[0]);
+    await poiService.createPoi(pois[0]);
+    const returnedPois = await poiService.getPois();
+    assert.isDefined(returnedPois[0].submitter);
+    const users = await poiService.getUsers();
+    //assert(_.some([users[0]], newUser), "returnedUser must be a superset of newUser");
   });
 
 });

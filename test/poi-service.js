@@ -143,6 +143,87 @@ class PoiService {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+  async getMessages() {
+    try {
+      const response = await axios.get(this.baseUrl + "/api/messages");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getMessage(id) {
+    try {
+      const response = await axios.get(this.baseUrl + "/api/messages/" + id);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async createMessage(newMessage) {
+    try {
+      const response = await axios.post(this.baseUrl + "/api/messages", newMessage);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async deleteAllMessages() {
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/messages");
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async deleteOneMessage(id) {
+    try {
+      const response = await axios.delete(this.baseUrl + "/api/messages/" + id);
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  async authenticate(user) {
+    try {
+      const response = await axios.post(this.baseUrl + "/api/users/authenticate", user);
+      axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async clearAuth(user) {
+    axios.defaults.headers.common["Authorization"] = "";
+  }
+
 }
 
 module.exports = PoiService;
