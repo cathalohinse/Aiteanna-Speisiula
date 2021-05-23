@@ -3,6 +3,7 @@ const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
 const Handlebars = require("handlebars");
+const H = require('just-handlebars-helpers');
 const Cookie = require("@hapi/cookie");
 require('./app/models/db');
 const env = require('dotenv');
@@ -45,6 +46,7 @@ async function init() {
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(require('hapi-auth-jwt2'));
+  await H.registerHelpers(Handlebars);
   await server.validator(require("@hapi/joi"));
   ImageStore.configure(credentials);
   server.views({

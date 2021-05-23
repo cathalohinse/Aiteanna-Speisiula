@@ -1,6 +1,7 @@
 const Categories = require('./app/api/categories');
 const Users = require('./app/api/users');
 const Pois = require('./app/api/pois');
+const Messages = require('./app/api/messages');
 
 module.exports = [
   { method: 'GET', path: '/api/categories', config: Categories.find },
@@ -20,8 +21,14 @@ module.exports = [
   { method: "POST", path: "/api/pois", config: Pois.create },
   { method: "DELETE", path: "/api/pois/{id}", config: Pois.deleteOne },
   { method: "DELETE", path: "/api/pois", config: Pois.deleteAll },
-  { method: "POST", path: "/api/users/authenticate", config: Users.authenticate },
 
+  { method: 'GET', path: '/api/messages', config: Messages.find },
+  { method: 'GET', path: '/api/messages/{id}', config: Messages.findOne },
+  { method: "POST", path: "/api/messages", config: Messages.create },
+  { method: "DELETE", path: "/api/messages/{id}", config: Messages.deleteOne },
+  { method: "DELETE", path: "/api/messages", config: Messages.deleteAll },
+
+  { method: "POST", path: "/api/users/authenticate", config: Users.authenticate },
   { method: "PUT", path: "/api/users/{id}", config: Users.update },
 
 ];
