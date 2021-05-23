@@ -35,10 +35,13 @@ This application incorporates the following:
 * MapTiler
 * sanitize-html
 * JWT
+* Netlify
 
 	
 ### Links
 * [Glitch](https://aiteanna-speisiula.glitch.me/)
 * [Heroku](https://aiteanna-speisiula.herokuapp.com/)
-* [YouTube](https://www.youtube.com/watch?v=WgkLDYHRNuY)
+* [Netlify](https://ticking1.netlify.app/)
+* [YouTube (Assignment 1)](https://www.youtube.com/watch?v=WgkLDYHRNuY)
+* [YouTube (Assignment 2)](https://www.youtube.com/watch?v=kFRh5HAhqeQ)
 * ['ticking' github repository](https://github.com/cathalohinse/ticking)
