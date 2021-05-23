@@ -15,6 +15,7 @@ const Pois = {
     },
   },
 
+  //I wrote this in for the security assignment, to highlight some risks (XSS attacks) due to security weakness that have since been fixed.
   evil: {
     handler: async function (request, h) {
       return h.view("evil", { title: "YOU'VE BEEN HACKED"});
