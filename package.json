@@ -1,7 +1,7 @@
 {
-  "name": "donation-web-2021",
-  "version": "1.0.0",
-  "description": "",
+  "name": "aiteanna-speisiula",
+  "version": "2.1.1",
+  "description": "An application where the user inputs the name and location of all pubs they've visited.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -22,8 +22,12 @@
     "cloudinary-core": "^2.11.3",
     "dotenv": "^8.2.0",
     "handlebars": "^4.7.7",
+    "hapi-auth-jwt2": "^10.2.0",
     "html-entities": "^2.3.2",
     "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "just-handlebars-helpers": "^1.0.18",
+    "lodash": "^4.17.21",
     "mais-mongoose-seeder": "^1.0.7",
     "mongoose": "^5.11.15",
     "node": "^15.10.0",
@@ -31,6 +35,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
     "prettier": "^2.2.1"
   },
   "prettier": {

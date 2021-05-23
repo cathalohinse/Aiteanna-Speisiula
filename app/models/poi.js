@@ -7,7 +7,7 @@ const poiSchema = new Schema({
   location: String,
   latitude: Number,
   longitude: Number,
-  image: Object,
+  image: String,
   submitter: {
     type: Schema.Types.ObjectId,
     ref: "User",

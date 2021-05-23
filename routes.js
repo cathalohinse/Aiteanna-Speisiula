@@ -1,7 +1,6 @@
 "use strict";
 const Accounts = require("./app/controllers/accounts");
 const Pois = require("./app/controllers/pois");
-const Gallery = require("./app/controllers/gallery");
 
 module.exports = [
   { method: "GET", path: "/", config: Accounts.index },
@@ -24,10 +23,10 @@ module.exports = [
   { method: 'GET', path: "/showcategories", config: Pois.showCategories },
   { method: "GET", path: "/deletecategory/{_id}", config: Pois.deleteCategory },
   { method: "GET", path: "/evil", config: Pois.evil },
+  { method: "GET", path: "/message", config: Accounts.showMessages },
+  { method: "POST", path: "/sendmessage", config: Accounts.sendMessage },
+  { method: "GET", path: "/deletemessage/{_id}", config: Accounts.deleteMessage },
 
-  { method: 'GET', path: "/index", config: Gallery.index },
-  { method: 'POST', path: "/uploadfile", config: Gallery.uploadFile },
-  { method: 'GET', path: "/deleteimage/{id}", config: Gallery.deleteImage },
 
   {
     method: "GET",

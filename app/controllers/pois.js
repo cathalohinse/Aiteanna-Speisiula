@@ -36,11 +36,10 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
-        //coordinates: Joi.number().required(),
         latitude: Joi.number().required(),
         longitude: Joi.number().required(),
-        image: Joi.string().required(),
         category: Joi.string().required(),
+        imagefile: Joi.any().required(),
       },
       options: {
         abortEarly: false
@@ -63,6 +62,8 @@ const Pois = {
         const id = request.auth.credentials.id;
         const user = await User.findById(id);
         const data = request.payload;
+        const result = await ImageStore.uploadImage(data.imagefile);
+        const imageUrl = result.url;
         const rawCategory = request.payload.category.split(",");
         const category = await Category.findOne({
           county: rawCategory[0],
@@ -71,12 +72,11 @@ const Pois = {
         const newPoi = new Poi({
           name: sanitizeHtml(data.name),
           location: sanitizeHtml(data.location),
-          //coordinates: sanitizeHtml(data.coordinates),
           latitude: sanitizeHtml(data.latitude),
           longitude: sanitizeHtml(data.longitude),
-          image: sanitizeHtml(data.image),
           submitter: user._id,
           category: category._id,
+          image: imageUrl,
         });
         await newPoi.save();
         return h.redirect("/report");
@@ -84,6 +84,14 @@ const Pois = {
         return h.view("main", { errors: [{ message: err.message }] });
       }
     },
+
+    payload: {
+      multipart: true,
+      output: 'data',
+      maxBytes: 209715200,
+      parse: true
+    }
+
   },
 
   showPoi: {
@@ -106,11 +114,10 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         location: Joi.string().required(),
-        //coordinates: Joi.number().required(),
         latitude: Joi.number().required(),
         longitude: Joi.number().required(),
-        image: Joi.string().required(),
         category: Joi.string().required(),
+        imagefile: Joi.any().required()
       },
       options: {
         abortEarly: false
@@ -142,20 +149,28 @@ const Pois = {
         console.log(poi);
         const rawCategory = poiEdit.category.split(",");
         const category = await Category.findOne({ county: rawCategory[0], province: rawCategory[1] }).lean();
+        const result = await ImageStore.uploadImage(poiEdit.imagefile);
+        const imageUrl = result.url;
 
         poi.name = sanitizeHtml(poiEdit.name);
         poi.location = sanitizeHtml(poiEdit.location);
-        //poi.coordinates = sanitizeHtml(poiEdit.coordinates);
         poi.latitude = sanitizeHtml(poiEdit.latitude);
         poi.longitude = sanitizeHtml(poiEdit.longitude);
-        poi.image = sanitizeHtml(poiEdit.image);
         poi.category = category._id;
+        poi.image = imageUrl
         await poi.save();
         return h.redirect('/report');
       } catch (err) {
         return h.view('home', {errors: [{message: err.message}]});
       }
     },
+    payload: {
+      multipart: true,
+      output: 'data',
+      maxBytes: 209715200,
+      parse: true
+    }
+
   },
 
   deletePoi: {
@@ -198,7 +213,7 @@ const Pois = {
         });
         await newCategory.save();
         const categories = await Category.find().lean();
-        return h.view("category", { title: "All Categories", categories: categories });
+        return h.redirect("/showcategories", { title: "All Categories", categories: categories });
       } catch (err) {
         return h.view("main", { errors: [{ message: err.message }] });
       }

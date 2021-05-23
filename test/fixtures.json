@@ -1,0 +1,76 @@
+{
+  "poiService": "http://localhost:4000",
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "$2a$10$YLzgnyE9fBdlOf.SD.9c5eC7NhXr4SMLoshlRTAZ7SXi2CAYVC2B."
+    },
+    {
+      "firstName": "Cathal",
+      "lastName": "Henchy",
+      "email": "cathalohinse@gmail.com",
+      "password": "$2a$10$GDIUKb9vEZH5SCuwsDnwMuPsZl.Y0vlH2v9vg7yleezq25k5GmmlK"
+    }
+  ],
+  "pois": [
+    {
+      "name": "Abbey Tavern",
+      "location": "Quin",
+      "latitude": 52.81749,
+      "longitude": -8.86378,
+      "image": "tavern.jpg"
+    },
+    {
+      "name": "Grand Khaan",
+      "location": "Ulaanbaatar",
+      "latitude": 47.91379,
+      "longitude": 106.90622,
+      "image": "grandkhaan.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "county": "Clare",
+      "province": "Munster"
+    },
+    {
+      "county": "Waterford",
+      "province": "Munster"
+    }
+  ],
+  "messages": [
+    {
+      "body": "Congratulations, your API test has passed",
+      "recipient": "cathalohinse@gmail.com"
+    },
+    {
+      "body": "Your API is now fully safe to use",
+      "recipient": "homer@simpson.com"
+    }
+  ],
+  "newUser": {
+    "firstName": "Dan",
+    "lastName": "Shanahan",
+    "email": "DantheMan@gmail.com",
+    "password": "q"
+  },
+  "newPoi": {
+    "name": "Norrie Henchy's",
+    "location": "Clooney",
+    "latitude": 52.85703,
+    "longitude": -8.85090,
+    "image": "henchy.jpg"
+  },
+  "newCategory":
+  {
+    "county": "Tyrone",
+    "province": "Ulster"
+  },
+  "newMessage":
+  {
+    "body": "Your API is exquisite!",
+    "recipient": "DantheMan@gmail.com"
+  }
+}

@@ -3,6 +3,7 @@ const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
 const Handlebars = require("handlebars");
+const H = require('just-handlebars-helpers');
 const Cookie = require("@hapi/cookie");
 require('./app/models/db');
 const env = require('dotenv');
@@ -10,15 +11,21 @@ const ImageStore = require('./app/utils/image-store');
 const dotenv = require('dotenv');
 const Joi = require("@hapi/joi");
 const fs = require('fs');
+const utils = require("./app/api/utils.js");
 
 env.config();
 
-const server = Hapi.server({
+/*const server = Hapi.server({
   port: 3443,
   tls: {
     key: fs.readFileSync('keys/private/webserver.key'),
     cert: fs.readFileSync('keys/webserver.crt')
   }
+});*/
+
+const server = Hapi.server({
+  port: process.env.PORT || 4000,
+  routes: { cors: true },
 });
 
 const credentials = {
@@ -26,7 +33,9 @@ const credentials = {
   api_key: process.env.key,
   api_secret: process.env.secret
 };
+
 const result = dotenv.config();
+
 if (result.error) {
   console.log(result.error.message);
   process.exit(1);
@@ -36,10 +45,10 @@ async function init() {
   await server.register(Inert);
   await server.register(Vision);
   await server.register(Cookie);
+  await server.register(require('hapi-auth-jwt2'));
+  await H.registerHelpers(Handlebars);
   await server.validator(require("@hapi/joi"));
-
   ImageStore.configure(credentials);
-
   server.views({
     engines: {
       hbs: require("handlebars"),
@@ -59,8 +68,14 @@ async function init() {
     },
     redirectTo: "/",
   });
+  server.auth.strategy("jwt", "jwt", {
+    key: "secretpasswordnotrevealedtoanyone",
+    validate: utils.validate,
+    verifyOptions: { algorithms: ["HS256"] },
+  });
   server.auth.default("session");
   server.route(require("./routes"));
+  server.route(require('./routes-api'));
   await server.start();
   console.log(`Server running at: ${server.info.uri}`);
 }
