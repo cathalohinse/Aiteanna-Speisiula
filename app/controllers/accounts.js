@@ -207,10 +207,7 @@ const Accounts = {
       }
     }
   },
-
-
-
-
+  
   sendMessage: {
     validate: {
       payload: {
@@ -231,7 +228,10 @@ const Accounts = {
             errors: error.details,
             user: user,
             messages: messages,
-            //users: users
+            //I cannot get the user's email address to render in the inbox table when errors occur.
+            //I attempted to get it to work here, by including 'users: users', but to no avail.
+            //The best that I can do is display the not so user-friendly user id, by changing the table in 'inbox.hbs',
+            //but this is at the expense of displaying the user's email when not in error mode.
           })
           .takeover()
           .code(400);
@@ -246,6 +246,9 @@ const Accounts = {
           body: sanitizeHtml(data.body),
           recipient: sanitizeHtml(data.recipient),
           sender: user._id
+          //If I had more time, I would have attempted to enforce the user to only enter email addresses that were already
+          //in the database (i.e. some sort of 'Message not deliverable - Recipient not found' error message.
+          //Presumably, the strategy to do this would be carried out here.
         });
         await newMessage.save();
         const messages = await Message.find().lean();
@@ -264,7 +267,6 @@ const Accounts = {
       return h.redirect("/message");
     }
   }
-
 
 };
 
