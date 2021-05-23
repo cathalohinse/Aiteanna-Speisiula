@@ -45,5 +45,18 @@
       "category": "->categories.banner",
       "submitter": "->users.cathal"
     }
+  },
+  "messages": {
+    "_model": "Message",
+    "Welcome": {
+      "body": "Welcome to Áiteanna Spéisiúla, from the team. We hope you enjoy this application",
+      "recipient": "cathalohinse@gmail.com",
+      "sender": "->users.homer"
+    },
+    "Intro": {
+      "body": "You have two days left to avail of a 25% discount on our premium subscription! Click here for more info.",
+      "recipient": "homer@simpson.com",
+      "sender": "->users.cathal"
+    }
   }
 }

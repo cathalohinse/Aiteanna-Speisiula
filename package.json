@@ -26,6 +26,7 @@
     "html-entities": "^2.3.2",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
+    "just-handlebars-helpers": "^1.0.18",
     "lodash": "^4.17.21",
     "mais-mongoose-seeder": "^1.0.7",
     "mongoose": "^5.11.15",

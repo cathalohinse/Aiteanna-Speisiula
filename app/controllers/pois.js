@@ -213,7 +213,7 @@ const Pois = {
         });
         await newCategory.save();
         const categories = await Category.find().lean();
-        return h.view("category", { title: "All Categories", categories: categories });
+        return h.redirect("/showcategories", { title: "All Categories", categories: categories });
       } catch (err) {
         return h.view("main", { errors: [{ message: err.message }] });
       }

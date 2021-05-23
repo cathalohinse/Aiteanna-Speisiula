@@ -1,5 +1,6 @@
 "use strict";
 const User = require("../models/user");
+const Message = require("../models/message");
 const Boom = require("@hapi/boom");
 const Joi = require('@hapi/joi');
 const bcrypt = require("bcrypt");
@@ -117,7 +118,7 @@ const Accounts = {
   },
 
   logout: {
-    handler: function(request, h) {
+    handler: async function(request, h) {
       request.cookieAuth.clear();
       return h.redirect("/");
     }
@@ -180,7 +181,90 @@ const Accounts = {
       await user.remove();
       return h.view("delete-user");
     }
+  },
+
+  showMessage: {
+    handler: async function(request, h) {
+      try {
+        const id = request.auth.credentials.id;
+        const user = await User.findById(id).lean();
+        return h.view("message", { title: "Private Messaging", user: user });
+      } catch (err) {
+        return h.view("login", { errors: [{ message: err.message }] });
+      }
+    }
+  },
+
+  showMessages: {
+    handler: async function (request, h) {
+      try {
+        const id = request.auth.credentials.id;
+        const user = await User.findById(id).lean();
+        const messages = await Message.find().populate("sender").populate("message").lean();
+        return h.view("message", { title: "Private Messaging", messages: messages, user: user, var: "hey" });
+      } catch (err) {
+        return h.view("login", { errors: [{ message: err.message }] });
+      }
+    }
+  },
+
+
+
+
+  sendMessage: {
+    validate: {
+      payload: {
+        body: Joi.string().required(),
+        recipient: Joi.string().email().required(),
+      },
+      options: {
+        abortEarly: false
+      },
+      failAction: async function (request, h, error)
+      {
+        const user = await User.findById(request.auth.credentials.id).lean();
+        const messages = await Message.find().lean();
+        const users = await User.find().lean();
+        return h
+          .view('message', {
+            title: 'Error Sending Message',
+            errors: error.details,
+            user: user,
+            messages: messages,
+            //users: users
+          })
+          .takeover()
+          .code(400);
+      }
+    },
+    handler: async function (request, h) {
+      try{
+        const id = request.auth.credentials.id;
+        const user = await User.findById(id);
+        const data = request.payload;
+        const newMessage = new Message({
+          body: sanitizeHtml(data.body),
+          recipient: sanitizeHtml(data.recipient),
+          sender: user._id
+        });
+        await newMessage.save();
+        const messages = await Message.find().lean();
+        return h.redirect("/message", { title: "All Messages", messages: messages });
+      } catch (err) {
+        return h.view("main", { errors: [{ message: err.message }] });
+      }
+    },
+  },
+
+  deleteMessage: {
+    handler: async function (request, h) {
+      const message = Message.findById(request.params._id);
+      console.log("Deleting Message: " + message);
+      await message.remove();
+      return h.redirect("/message");
+    }
   }
+
 
 };
 
