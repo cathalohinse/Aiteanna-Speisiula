@@ -41,7 +41,8 @@ This application incorporates the following:
 ### Links
 * [Glitch](https://aiteanna-speisiula.glitch.me/)
 * [Heroku](https://aiteanna-speisiula.herokuapp.com/)
-* [Netlify](https://ticking1.netlify.app/)
+* [Netlify (Svelte)](https://ticking1.netlify.app/)
+* [Netlify (node)](https://aiteanna-speisiula.netlify.app/)
 * [YouTube (Assignment 1)](https://www.youtube.com/watch?v=WgkLDYHRNuY)
 * [YouTube (Assignment 2)](https://www.youtube.com/watch?v=kFRh5HAhqeQ)
 * ['ticking' github repository](https://github.com/cathalohinse/ticking)
