@@ -1,7 +1,7 @@
-<form action="/ratepoi/{{poi._id}}" method="POST" enctype="multipart/form-data">
+<form action="/makecomment" method="POST">
 <table style="color: black" class="uk-table">
   <caption style="color: black">
-    Pubs of Interest submitted to date:
+    Details of {{poi.name}} pub:
   </caption>
   <thead>
   <th style="color: black">Name</th>
@@ -10,7 +10,6 @@
   <th style="color: black">Image</th>
   <th style="color: black">Category</th>
   <th style="color: black">Submitter</th>
-  <th style="color: black">Rate</th>
   </thead>
   <tbody class="uk-text-left">
     <tr>
@@ -19,25 +18,21 @@
       <td>{{poi.latitude}}, {{poi.longitude}}</td>
       <td><img src="{{poi.image}}" alt="Pub"></td>
       <td>{{poi.category.county}}, {{poi.category.province}}</td>
-      <td>{{poi.submitter.firstName}}, {{poi.submitter.lastName}}</td>
-      <td>
-        <label style="color: black" class="uk-form-label" for="form-stacked-select">Select Rating</label>
-        <div class="uk-form-controls">
-          <select name="category" class="uk-select">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-      </td>
+      <td>{{poi.submitter.firstName}} {{poi.submitter.lastName}}</td>
     </tr>
   </tbody>
 </table>
+  <div class="uk-margin">
+    <div class="uk-inline uk-width-1-1">
+
+      <textarea class="uk-textarea" rows="5" type="text" name="commentBody" placeholder="Enter Comment here"></textarea>
+
+    </div>
+  </div>
 
   <div class="uk-margin">
     <button style="background-color: #653DC2"
-            class="uk-button uk-button-primary uk-button-large uk-width-1-1">Rate</button>
+            class="uk-button uk-button-primary uk-button-large uk-width-1-1">COMMENT</button>
   </div>
   <div>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -97,3 +92,4 @@
   </div>
   </div>
 </form>
+{{> error }}

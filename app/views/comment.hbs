@@ -1,5 +1,5 @@
 <div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
-  {{> title-card title="Pubs of Interest" subTitle="Please rate your Pub of Interest"}}
+  {{> title-card title="Pubs of Interest" subTitle="Please comment on your Pub of Interest"}}
   {{> main-menu }}
 </div>
 
@@ -10,8 +10,11 @@
     </div>
     <div class="uk-width-expand@m">
       <div style="background-color: #877EB4" class="uk-card uk-card-default uk-width-xlarge uk-card-body uk-box-shadow-large">
-        <h3 class="uk-card-title uk-text-center">Your Pub of Interest:</h3>
-        {{> ratepoi-form}}
+        <h3 class="uk-card-title uk-text-center">{{poi.name}}</h3>
+        {{> comment-form}}
+      </div>
+      <div class="uk-width-1-1">
+        {{> comment-list}}
       </div>
     </div>
   </div>

@@ -33,7 +33,6 @@
       "latitude": 16.77379,
       "longitude": 96.16968,
       "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1621082217/kf9foi8496whvzgqjvny.jpg",
-      "rating": 2,
       "category": "->categories.deise",
       "submitter": "->users.homer"
     },
@@ -43,7 +42,6 @@
       "latitude": 47.91379,
       "longitude": 106.90622,
       "image": "https://res.cloudinary.com/cathalohinse/image/upload/v1616002230/owluu8mf11dlfrmv4761.jpg",
-      "rating": 5,
       "category": "->categories.banner",
       "submitter": "->users.cathal"
     }
@@ -59,6 +57,19 @@
       "body": "You have two days left to avail of a 25% discount on our premium subscription! Click here for more info.",
       "recipient": "homer@simpson.com",
       "sender": "->users.cathal"
+    }
+  },
+  "comments": {
+    "_model": "Comment",
+    "comment1": {
+      "commentBody": "Great Pub",
+      "poi": "->pois.sullies",
+      "commenter": "->users.homer"
+    },
+    "comment2": {
+      "commentBody": "Lovely Porter - yum yum",
+      "poi": "->pois.henchy",
+      "commenter": "->users.cathal"
     }
   }
 }

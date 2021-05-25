@@ -15,8 +15,7 @@ const poiSchema = new Schema({
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
-  },
-  rating: Number
+  }
 });
 
 module.exports = Mongoose.model("Poi", poiSchema);

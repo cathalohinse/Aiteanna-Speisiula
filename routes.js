@@ -26,8 +26,9 @@ module.exports = [
   { method: "GET", path: "/message", config: Accounts.showMessages },
   { method: "POST", path: "/sendmessage", config: Accounts.sendMessage },
   { method: "GET", path: "/deletemessage/{_id}", config: Accounts.deleteMessage },
-  { method: "GET", path: "/showratepoi/{_id}", config: Pois.ratePoi },
-  { method: "POST", path: "/ratepoi/{_id}", config: Pois.submitRating },
+  { method: "GET", path: "/showcomments/{_id}", config: Pois.showComments },
+  { method: "POST", path: "/makecomment", config: Pois.makeComment },
+  { method: "GET", path: "/deletecomment/{_id}", config: Pois.deleteComment },
 
 
   {

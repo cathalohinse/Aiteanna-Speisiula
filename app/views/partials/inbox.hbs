@@ -1,33 +1,24 @@
+ <div style="background-color: #877EB4" class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+   <h3 class="uk-card-title uk-text-center">Inbox</h3>
+   <table style="color: black" class="uk-table">
+     <caption style="color: black">
 
-
-
-
-
-      <div style="background-color: #877EB4" class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
-        <h3 class="uk-card-title uk-text-center">Inbox</h3>
-        <table style="color: black" class="uk-table">
-          <caption style="color: black">
-          </caption>
-          <thead>
-          <th style="color: black">Message</th>
-          <th style="color: black">From</th>
-          <th style="color: black">Delete</th>
-          </thead>
-          <tbody class="uk-text-left">
-          {{#each messages}}
-            {{#if (eq recipient ../user.email)}}
-              <tr>
-                <td>{{body}}</td>
-                <td>{{sender.email}}</td>
-                <td><a href="/deletemessage/{{_id}}"><i class="fas fa-trash fa-2x" style="color:#653DC2"></i></a></td>
-              </tr>
-
-
-
-            {{/if}}
-          {{/each}}
-          </tbody>
-        </table>
-      </div>
-
-
+     </caption>
+     <thead>
+     <th style="color: black">Message</th>
+     <th style="color: black">From</th>
+     <th style="color: black">Delete</th>
+     </thead>
+     <tbody class="uk-text-left">
+     {{#each messages}}
+       {{#if (eq recipient ../user.email)}}
+         <tr>
+           <td>{{body}}</td>
+           <td>{{sender.email}}</td>
+           <td><a href="/deletemessage/{{_id}}"><i class="fas fa-trash fa-2x" style="color:#653DC2"></i></a></td>
+         </tr>
+       {{/if}}
+     {{/each}}
+     </tbody>
+   </table>
+ </div>

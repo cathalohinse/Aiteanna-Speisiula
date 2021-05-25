@@ -1,0 +1,23 @@
+<div style="background-color: #877EB4" class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+  <h3 class="uk-card-title uk-text-center">Comments</h3>
+  <table style="color: black" class="uk-table">
+    <caption style="color: black">
+    </caption>
+    <thead>
+    <th style="color: black">Comment</th>
+    <th style="color: black">POI</th>
+    <th style="color: black">From</th>
+    <th style="color: black">Delete</th>
+    </thead>
+    <tbody class="uk-text-left">
+    {{#each comments}}
+        <tr>
+          <td>{{commentBody}}</td>
+          <td>{{poi}}</td>
+          <td>{{commenter.firstName}} {{commenter.lastName}}</td>
+          <td><a href="/deletecomment/{{_id}}"><i class="fas fa-trash fa-2x" style="color:#653DC2"></i></a></td>
+        </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>

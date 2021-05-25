@@ -2,6 +2,8 @@
 const Poi = require("../models/poi");
 const User = require("../models/user");
 const Category = require("../models/category");
+const Message = require("../models/message");
+const Comment = require("../models/comment");
 const ImageStore = require('../utils/image-store');
 const Joi = require('@hapi/joi');
 const sanitizeHtml = require("sanitize-html");
@@ -235,7 +237,7 @@ const Pois = {
     }
   },
 
-  ratePoi: {
+  /*ratePoi: {
     handler: async function(request, h) {
       try {
         const id = request.params._id
@@ -244,7 +246,7 @@ const Pois = {
         const category = await Category.find().lean();
         const categories = await Category.find().lean().sort('county');
         const users = await User.find().lean().sort('firstName');
-        return h.view("ratepoi", { title: "Rate POI", poi: poi, categories: categories, category: category, users: users });
+        return h.view("comment", { title: "Rate POI", poi: poi, categories: categories, category: category, users: users });
       } catch (err) {
         return h.view("home", { errors: [{ message: err.message }] });
       }
@@ -266,7 +268,7 @@ const Pois = {
         const category = await Category.find().lean();
         const categories = await Category.find().lean().sort('county');
         return h
-          .view('ratepoi', {
+          .view('comment', {
             title: 'Failed to rate POI',
             errors: error.details,
             poi: poi,
@@ -290,6 +292,77 @@ const Pois = {
       } catch (err) {
         return h.view('home', {errors: [{message: err.message}]});
       }
+    }
+  },*/
+
+
+  showComments: {
+    handler: async function (request, h) {
+      try {
+        //const id = request.auth.credentials.id;
+        const id = request.params._id;
+        const user = await User.findById(id).lean();
+        const poi = await Poi.findById(id).populate('submitter').populate('category').lean().sort('-category');
+        const category = await Category.find().lean();
+        const categories = await Category.find().lean().sort('county');
+        const comments = await Comment.find().populate("commenter").populate("comment").lean();
+        return h.view("comment", { title: "Comments", comments: comments, user: user, poi: poi, category: category, categories: categories });
+      } catch (err) {
+        return h.view("report", { errors: [{ message: err.message }] });
+      }
+    }
+  },
+
+  makeComment: {
+    validate: {
+      payload: {
+        commentBody: Joi.string().required()
+      },
+      options: {
+        abortEarly: false
+      },
+      failAction: async function (request, h, error)
+      {
+        const user = await User.findById(request.auth.credentials.id).lean();
+        const comments = await Comment.find().lean();
+        const users = await User.find().lean();
+        return h
+          .view('comment', {
+            title: 'Error Making Comment',
+            errors: error.details,
+            user: user,
+            comments: comments,
+          })
+          .takeover()
+          .code(400);
+      }
+    },
+    handler: async function (request, h) {
+      try{
+        const id = request.auth.credentials.id;
+        const user = await User.findById(id);
+        const poi = await Poi.findById(id).populate('submitter').lean();
+        const data = request.payload;
+        const newComment = new Comment({
+          commentBody: sanitizeHtml(data.commentBody),
+          poi: poi,
+          commenter: user._id
+        });
+        await newComment.save();
+        const comments = await Comment.find().lean();
+        return h.redirect("/comment", { title: "Comments", comments: comments });
+      } catch (err) {
+        return h.view("main", { errors: [{ message: err.message }] });
+      }
+    },
+  },
+
+  deleteComment: {
+    handler: async function (request, h) {
+      const comment = Comment.findById(request.params._id);
+      console.log("Deleting Comment: " + comment);
+      await comment.remove();
+      return h.redirect("/comment");
     }
   }
 

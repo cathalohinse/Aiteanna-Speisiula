@@ -13,7 +13,7 @@
     <th style="color: black">Submitter</th>
     <th style="color: black">Delete</th>
     <th style="color: black">Update</th>
-    <th style="color: black">Rate</th>
+    <th style="color: black">Comment</th>
     </thead>
     <tbody class="uk-text-left">
     {{#each pois}}
@@ -26,7 +26,7 @@
         <td>{{submitter.firstName}} {{submitter.lastName}}</td>
         <td><a href="/deletepoi/{{_id}}"><i class="fas fa-trash fa-2x" style="color:#653DC2"></i></a></td>
         <td><a href="/showpoi/{{_id}}"><i class="fas fa-recycle fa-2x" style="color:#653DC2"></i></a></td>
-        <td>{{rating}}<a href="/showratepoi/{{_id}}"><i class="fas fa-star fa-2x" style="color:#653DC2"></i></a></td>
+        <td><a href="/showcomments/{{_id}}"><i class="fas fa-star fa-2x" style="color:#653DC2"></i></a></td>
       </tr>
     {{/each}}
     </tbody>
