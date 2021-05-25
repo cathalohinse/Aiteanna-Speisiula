@@ -87,8 +87,9 @@ const Users = {
   },
 
   update: {
-
-
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       const userEdit = request.payload;
       const user = await User.findById(userEdit._id);

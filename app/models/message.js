@@ -1,7 +1,7 @@
 'use strict';
 const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
-const messageSchema = Schema({
+const messageSchema = new Schema({
   body: String,
   recipient: String,
   sender: {
