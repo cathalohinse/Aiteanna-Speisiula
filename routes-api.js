@@ -30,5 +30,6 @@ module.exports = [
 
   { method: "POST", path: "/api/users/authenticate", config: Users.authenticate },
   { method: "PUT", path: "/api/users/{id}", config: Users.update },
+  { method: "POST", path: "/api/pois/{id}", config: Pois.update },
 
 ];

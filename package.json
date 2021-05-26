@@ -1,6 +1,6 @@
 {
   "name": "aiteanna-speisiula",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "An application where the user inputs the name and location of all pubs they've visited.",
   "main": "index.js",
   "scripts": {
