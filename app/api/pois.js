@@ -11,7 +11,7 @@ const Pois = {
       strategy: "jwt",
     },
     handler: async function (request, h) {
-      const pois = await Poi.find();
+      const pois = await Poi.find().populate("category").populate("submitter");
       return pois;
     },
   },
@@ -83,6 +83,54 @@ const Pois = {
         return { success: true };
       }
       return Boom.notFound("id not found");
+    },
+  },
+
+  /*update: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      const poiEdit = request.payload;
+      const poi = await Poi.findById(poiEdit._id);
+      poi.name = poiEdit.name;
+      poi.location = poiEdit.location;
+      poi.latitude = poiEdit.latitude;
+      poi.longitude = poiEdit.longitude;
+      poi.image = poiEdit.image;
+      poi.category = poiEdit.category;
+      poi.submitter = poiEdit.submitter;
+      await poi.save();
+      if (poi) {
+        return { success: true };
+      }
+      return Boom.notFound("id not found");
+    },
+  },*/
+
+  update: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      const poiId = request.params.id;
+      const data = request.payload;
+      const poi = await Poi.updateOne(
+        { _id: poiId },
+        {
+          name: data.name,
+          location: data.location,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          image: data.image,
+          category: data.category,
+          //submitter: data.submitter,
+        }
+      );
+      if (poi) {
+        return h.response(poi).code(201);
+      }
+      return Boom.badImplementation("Error editing POI");
     },
   },
 
