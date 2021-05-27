@@ -44,5 +44,5 @@ This application incorporates the following:
 * [Netlify (Svelte)](https://ticking1.netlify.app/)
 * [Netlify (node)](https://aiteanna-speisiula.netlify.app/)
 * [YouTube (Assignment 1)](https://www.youtube.com/watch?v=WgkLDYHRNuY)
-* [YouTube (Assignment 2)](https://www.youtube.com/watch?v=kFRh5HAhqeQ)
+* [YouTube (Assignment 2)](https://www.youtube.com/watch?v=lntrmNOL7WQ)
 * ['ticking' github repository](https://github.com/cathalohinse/ticking)
